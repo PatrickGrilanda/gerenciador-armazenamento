@@ -1,14 +1,18 @@
 # -*- mode: python ; coding: utf-8 -*-
+import os
+
 from PyInstaller.utils.hooks import collect_data_files, collect_submodules
 
 block_cipher = None
+
+project_root = os.path.abspath(os.path.join(os.path.dirname(SPEC), ".."))
 
 datas = collect_data_files("customtkinter")
 hiddenimports = collect_submodules("customtkinter") + ["win32api", "win32con"]
 
 a = Analysis(
-    ["run.py"],
-    pathex=[],
+    [os.path.join(project_root, "run.py")],
+    pathex=[project_root],
     binaries=[],
     datas=datas,
     hiddenimports=hiddenimports,
